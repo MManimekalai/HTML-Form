@@ -1,61 +1,46 @@
-var submit = document.getElementById("submit");
-submit.addEventListener("click", function (event) {
-    event.preventDefault();
-    var firstName = document.getElementById("fname").value.trim();
-    var lastName = document.getElementById("lname").value.trim();
-    var addressLine1 = document.getElementById("address1").value.trim();
-    var addressLine2 = document.getElementById("address2").value.trim();
-    var pincode = document.getElementById("pin").value.trim();
-    var genderElements = document.getElementsByName("gender");
-    var selectedGender = "";
-    var foodElements = document.getElementsByName("food");
-    var selectedFood = [];
-    var stateValue = document.getElementById("state").value.trim();
-    var countryValue = document.getElementById("country").value.trim();
+const form = document.getElementById("form");
+const table = document.getElementById("myTable");
 
-    for (var i = 0; i < genderElements.length; i++) {
-        if (genderElements[i].checked) {
-            selectedGender = genderElements[i].value;
-        }
-    }
+function addRow(firstName, lastName, pincode, address, gender, food, state, country) {
+  const row = table.insertRow(-1);
+  row.insertCell(0).innerHTML = firstName;
+  row.insertCell(1).innerHTML = lastName;
+  row.insertCell(2).innerHTML = pincode;
+  row.insertCell(3).innerHTML = address;
+  row.insertCell(4).innerHTML = gender;
+  row.insertCell(5).innerHTML = food;
+  row.insertCell(6).innerHTML = state;
+  row.insertCell(7).innerHTML = country;
+}
 
-    for (var i = 0; i < foodElements.length; i++) {
-        if (foodElements[i].checked) {
-            selectedFood.push(foodElements[i].value);
-        }
-    }
+form.addEventListener("submit", function(event) {
+  event.preventDefault();
 
-    if (
-        firstName === "" ||
-        lastName === "" ||
-        addressLine1 === "" ||
-        addressLine2 === "" ||
-        pincode === "" ||
-        selectedGender === "" ||
-        selectedFood.length < 2 ||
-        stateValue === "" ||
-        countryValue === ""
-    ) {
-        alert("Please fill out all required fields and choose at least 2 food options.");
-    } else {
-        // If validation passes, add the data to the table
-        tablecontent(firstName, lastName, addressLine1 + ", " + addressLine2, pincode, selectedGender, selectedFood.join(", "), stateValue, countryValue);
+const firstName = form.elements["firstName"].value;
+const lastName = form.elements["lastName"].value;
+const pincode = form.elements["pincode"].value;
+const address = form.elements["address"].value;
+const gender = form.elements["gender"].value;
+const food = [];
+const foodInputs = form.elements["food[]"];
+let foodCount = 0;
 
-        document.getElementById("right-panel").style.display = "block";
+for (let i = 0; i < foodInputs.length; i++) {
+  if (foodInputs[i].checked) {
+    food.push(foodInputs[i].value);
+    foodCount++;
+  }
+}
 
-        // Clear form fields
-        document.getElementById("fname").value = "";
-        document.getElementById("lname").value = "";
-        document.getElementById("address1").value = "";
-        document.getElementById("address2").value = "";
-        document.getElementById("pin").value = "";
-        for (var i = 0; i < genderElements.length; i++) {
-            genderElements[i].checked = false;
-        }
-        for (var i = 0; i < foodElements.length; i++) {
-            foodElements[i].checked = false;
-        }
-        document.getElementById("state").value = "";
-        document.getElementById("country").value = "";
-    }
+if (foodCount < 2) {
+  alert("Choose atleast two");
+  return;
+}
+
+const state = form.elements["state"].value;
+const country = form.elements["country"].value;
+
+addRow(firstName, lastName, pincode, address, gender, food.join(", "), state, country);
+
+form.reset();
 });
