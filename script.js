@@ -3,20 +3,24 @@ var form = document.getElementById("myForm");
 form.addEventListener("submit", function (event) {
     event.preventDefault(); // Prevent the default form submission
 
-    // Form validation
-    var firstName = fname.value.trim();
-    var lastName = lname.value.trim();
-    var addressLine1 = address1.value.trim();
-    var addressLine2 = address2.value.trim();
-    var pincode = pin.value.trim();
+    var firstName = document.getElementById("fname").value.trim();
+    var lastName = document.getElementById("lname").value.trim();
+    var addressLine1 = document.getElementById("address1").value.trim();
+    var addressLine2 = document.getElementById("address2").value.trim();
+    var pincode = document.getElementById("pin").value.trim();
     var genderElements = document.getElementsByName("gender");
     var selectedGender = "";
     var foodElements = document.getElementsByName("food");
     var selectedFood = [];
-    var stateValue = state.value.trim();
-    var countryValue = country.value.trim();
+    var stateValue = document.getElementById("state").value.trim();
+    var countryValue = document.getElementById("country").value.trim();
 
-    // Check if at least two food options are selected
+    for (var i = 0; i < genderElements.length; i++) {
+        if (genderElements[i].checked) {
+            selectedGender = genderElements[i].value;
+        }
+    }
+
     for (var i = 0; i < foodElements.length; i++) {
         if (foodElements[i].checked) {
             selectedFood.push(foodElements[i].value);
@@ -27,6 +31,7 @@ form.addEventListener("submit", function (event) {
         firstName === "" ||
         lastName === "" ||
         addressLine1 === "" ||
+        addressLine2 === "" ||
         pincode === "" ||
         selectedGender === "" ||
         selectedFood.length < 2 ||
@@ -35,22 +40,23 @@ form.addEventListener("submit", function (event) {
     ) {
         alert("Please fill out all required fields and choose at least 2 food options.");
     } else {
-        // If validation passes, add the data to the table
         tablecontent(firstName, lastName, addressLine1 + ", " + addressLine2, pincode, selectedGender, selectedFood.join(", "), stateValue, countryValue);
 
+        document.getElementById("right-panel").style.display = "block";
+
         // Clear form fields
-        fname.value = "";
-        lname.value = "";
-        address1.value = "";
-        address2.value = "";
-        pin.value = "";
+        document.getElementById("fname").value = "";
+        document.getElementById("lname").value = "";
+        document.getElementById("address1").value = "";
+        document.getElementById("address2").value = "";
+        document.getElementById("pin").value = "";
         for (var i = 0; i < genderElements.length; i++) {
             genderElements[i].checked = false;
         }
         for (var i = 0; i < foodElements.length; i++) {
             foodElements[i].checked = false;
         }
-        state.value = "";
-        country.value = "";
+        document.getElementById("state").value = "";
+        document.getElementById("country").value = "";
     }
 });
