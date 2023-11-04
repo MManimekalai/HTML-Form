@@ -1,8 +1,6 @@
-var form = document.getElementById("myForm");
-
-form.addEventListener("submit", function (event) {
-    event.preventDefault(); // Prevent the default form submission
-
+var submit = document.getElementById("submit");
+submit.addEventListener("click", function (event) {
+    event.preventDefault();
     var firstName = document.getElementById("fname").value.trim();
     var lastName = document.getElementById("lname").value.trim();
     var addressLine1 = document.getElementById("address1").value.trim();
@@ -40,6 +38,7 @@ form.addEventListener("submit", function (event) {
     ) {
         alert("Please fill out all required fields and choose at least 2 food options.");
     } else {
+        // If validation passes, add the data to the table
         tablecontent(firstName, lastName, addressLine1 + ", " + addressLine2, pincode, selectedGender, selectedFood.join(", "), stateValue, countryValue);
 
         document.getElementById("right-panel").style.display = "block";
