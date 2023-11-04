@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,49 +9,52 @@
         integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" href="index.css">
 </head>
-
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-sm-4 ">
-                <form>
+            <div class="col-sm-4">
+                <form id="myForm">
                     <h2 class="h3">FORM SUBMISSION:</h2>
                     <label for="fname">First Name:</label><br>
-                    <input type="text" name="fname" id="fname" placeholder="First Name"><br><br>
+                    <input type="text" name="fname" id="fname" placeholder="First Name" required><br><br>
 
                     <label for="lname">Last Name:</label><br>
-                    <input type="text" name="lname" id="lname" placeholder="Last Name"><br><br>
+                    <input type="text" name="lname" id="lname" placeholder="Last Name" required><br><br>
 
                     <label for="address1">Address Line 1:</label><br>
-                    <input type="text" name="address1" id="address1" placeholder="Address Line 1"><br><br>
+                    <input type="text" name="address1" id="address1" placeholder="Address Line 1" required><br><br>
 
                     <label for="address2">Address Line 2:</label><br>
-                    <input type="text" name="address2" id="address2" placeholder="Address Line 2"><br><br>
+                    <input type="text" name="address2" id="address2" placeholder="Address Line 2" required><br><br>
 
                     <label for="pin">PIN:</label><br>
-                    <input type="number" name="pin" id="pin" placeholder="PIN"><br><br>
+                    <input type="number" name="pin" id="pin" placeholder="PIN" required><br><br>
 
                     <label for="gender">Gender:</label><br>
-                    <input type="radio" name="gender" id="gender" value="Male"> Male
-                    <input type="radio" name="gender" id="gender" value="Female"> Female <br><br>
+                    <div>
+                        <input type="radio" name="gender" id="male" value="Male" required> <label for="male">Male</label>
+                        <input type="radio" name="gender" id="female" value="Female" required> <label for="female">Female</label>
+                    </div><br>
 
                     <label for="food">Choice of Food:<span style="font-weight: lighter;"> (must choose at least 2 out of 5 options)</span></label>
-                    <input type="checkbox" name="food" id="food" value="North Indian"> North Indian <br>
-                    <input type="checkbox" name="food" id="food" value="South Indian"> South Indian <br>
-                    <input type="checkbox" name="food" id="food" value="Chinese"> Chinese <br>
-                    <input type="checkbox" name="food" id="food" value="Japanese"> Japanese <br>
-                    <input type="checkbox" name="food" id="food" value="Sea Food"> Sea Food <br><br>
+                    <div>
+                        <input type="checkbox" name="food" id="food1" value="North Indian"> <label for="food1">North Indian</label> <br>
+                        <input type="checkbox" name="food" id="food2" value="South Indian"> <label for="food2">South Indian</label> <br>
+                        <input type="checkbox" name="food" id="food3" value="Chinese"> <label for="food3">Chinese</label> <br>
+                        <input type="checkbox" name="food" id="food4" value="Japanese"> <label for="food4">Japanese</label> <br>
+                        <input type="checkbox" name="food" id="food5" value="Sea Food"> <label for="food5">Sea Food</label> <br>
+                    </div><br>
 
                     <label for="state">State:</label><br>
-                    <input type="text" name="state" id="state" placeholder="State"><br><br>
+                    <input type="text" name="state" id="state" placeholder="State" required><br><br>
 
                     <label for="country">Country:</label><br>
-                    <input type="text" name="country" id="country" placeholder="Country"><br><br>
+                    <input type="text" name="country" id="country" placeholder="Country" required><br><br>
 
                     <button type="submit" id="submit" class="btn btn-dark">Submit</button>
                 </form>
             </div>
-            <div class="col-sm-8 col-md-8 col-lg-8 ">
+            <div class="col-sm-8 col-md-8 col-lg-8" id="right-panel" style="display: none;">
                 <h1 class="h1">Temporary Database</h1>
                 <table>
                     <thead class="bg-dark text-light">
@@ -67,14 +69,11 @@
                             <th>Country</th>
                         </tr>
                     </thead>
-                    <tbody class="tbody" id="tbody">
-
-                    </tbody>
+                    <tbody id="tbody"></tbody>
                 </table>
             </div>
         </div>
     </div>
     <script src="script.js"></script>
 </body>
-
 </html>
